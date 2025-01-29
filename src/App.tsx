@@ -1,10 +1,19 @@
-import { useState } from "react";
+import "@mantine/core/styles.css";
+
 import "./App.css";
+import { AppLayout } from "./layout/AppLayout";
+import { createTheme, MantineProvider } from "@mantine/core";
+
+const theme = createTheme({});
 
 function App() {
-  const [count, setCount] = useState(0);
-
-  return <h1>hello</h1>;
+  return (
+    <>
+      <MantineProvider defaultColorScheme="auto" theme={theme}>
+        <AppLayout />
+      </MantineProvider>
+    </>
+  );
 }
 
 export default App;
