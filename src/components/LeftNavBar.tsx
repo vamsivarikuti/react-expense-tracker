@@ -1,39 +1,49 @@
-import { Menu, Text } from "@mantine/core";
+import { NavLink } from "@mantine/core";
 import {
-  IconMessageCircle,
-  IconPhoto,
-  IconSearch,
-  IconSettings,
+  Icon,
+  IconActivity,
+  IconFingerprint,
+  IconGauge,
+  IconProps,
 } from "@tabler/icons-react";
+import { ForwardRefExoticComponent } from "react";
 
-const IconSize = 14;
+interface NavItem {
+  icon: ForwardRefExoticComponent<IconProps & React.RefAttributes<Icon>>;
+  label: string;
+  path: string;
+  description?: string;
+  rightSection?: JSX.Element;
+}
+
+const data: NavItem[] = [
+  {
+    icon: IconGauge,
+    label: "Dashboard",
+    path: "/",
+    description: "Item with description",
+  },
+  {
+    icon: IconFingerprint,
+    label: "Security",
+    path: "/about",
+  },
+  { icon: IconActivity, label: "Activity", path: "/set" },
+];
 
 export const LeftNavbar = () => {
   return (
     <>
-      <Menu shadow="md">
-        <Menu.Label>Application</Menu.Label>
-        <Menu.Item leftSection={<IconSettings size={IconSize} />}>
-          Settings
-        </Menu.Item>
-        <Menu.Item leftSection={<IconMessageCircle size={IconSize} />}>
-          Messages
-        </Menu.Item>
-        <Menu.Item leftSection={<IconPhoto size={IconSize} />}>
-          Gallery
-        </Menu.Item>
-        <Menu.Item
-          leftSection={<IconSearch size={IconSize} />}
-          rightSection={
-            <Text size="xs" c="dimmed">
-              ⌘K
-            </Text>
-          }
-        >
-          Search
-        </Menu.Item>
-        <Menu.Divider />
-      </Menu>
+      {data.map((item) => (
+        <NavLink
+          href={`#${item.label}`}
+          key={item.label}
+          label={item.label}
+          description={item.description}
+          rightSection={item.rightSection}
+          leftSection={<item.icon size={20} stroke={1.5} />}
+        />
+      ))}
     </>
   );
 };
