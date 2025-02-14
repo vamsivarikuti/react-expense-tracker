@@ -24,8 +24,8 @@ const db = new Dexie("ExpenseDatabase") as Dexie & {
 
 // Schema declaration:
 db.version(1).stores({
-  expenses: "++id, name, category", // primary key "id" (for the runtime!)
+  expenses: "++id, name, note, category", // primary key "id" (for the runtime!)
 });
 
-export type { Expense };
+export type { Expense, Category };
 export { db };
